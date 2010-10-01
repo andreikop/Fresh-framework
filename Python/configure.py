@@ -33,6 +33,7 @@ import os
 import glob
 import optparse
 
+import os.path
 
 # Import SIP's configuration module so that we have access to the error
 # reporting.  Then try and import the configuration modules for both PyQt3 and
@@ -49,9 +50,6 @@ try:
     qt_data_dir = pyqt.qt_data_dir
 except:
     sipconfig.error("Unable to find either PyQt v3 or v4.")
-
-print pyqt.pyqt_mod_dir
-print pyqt
 
 # Initialise the globals.
 sip_min_version = 0x040a00
@@ -79,8 +77,7 @@ def create_optparser():
             "installed [default: QTDIR/fresh]")
     p.add_option("-c", "--concatenate", action="store_true", default=False,
             dest="concat", help="concatenate the C++ source files")
-    p.add_option("-d", "--destdir", action="callback",
-            default=pyqt.pyqt_mod_dir, type="string", metavar="DIR",
+    p.add_option("-d", "--destdir", action="callback", type="string", metavar="DIR",
             dest="freshmoddir", callback=store_abspath, help="where the "
             "Fresh module will be installed [default: %s]" %
             pyqt.pyqt_mod_dir)
@@ -111,7 +108,6 @@ def create_optparser():
             metavar="DIR", dest="freshsipdir", callback=store_abspath,
             type="string", help="where the Fresh .sip files will be "
             "installed [default: %s]" % pyqt.pyqt_sip_dir)
-    
     return p
 
 
@@ -256,7 +252,7 @@ def generate_code():
     makefile.extra_include_dirs.append('..')
     makefile.extra_include_dirs.append(opts.freshincdir)
     makefile.extra_lib_dirs.append(opts.freshlibdir)
-    makefile.extra_lib_dirs.append('.')
+    makefile.extra_lib_dirs.append('../build')
     makefile.extra_libs.append("cppfresh")
 
     makefile.generate()
@@ -301,7 +297,15 @@ def main(argv):
     # arguments that weren't specified.
     if opts.freshmoddir is None:
         opts.freshmoddir = pyqt.pyqt_mod_dir
-
+        if not os.path.exists(opts.freshdir):
+            print 'Invalid PyQt4 installation path in the PyQt4.pyqtconfig. Trying to detect automatically'
+            import PyQt4
+            opts.freshmoddir = os.path.dirname(PyQt4.__file__)
+            if os.path.exists(opts.freshmoddir):
+                print 'Detected'
+            else:
+                sipconfig.error("PyQt installation path not detected")
+    
     if opts.freshincdir is None:
         opts.freshincdir = pyqt.qt_inc_dir
 

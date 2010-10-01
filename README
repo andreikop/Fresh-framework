@@ -1,26 +1,59 @@
 Fresh is set of usefull widgets and objects, which extends Qt library.
+Library contains Python wrapper
+Home page:
+	http://github.com/hlamer/Fresh-framework/
+Home IRC room:
+	#monkeystudio on irc.freenode.net
 
-This is instruction for build and install it.
-If you found some error in the instruction, or installed library on other OS, 
-send please report or update to the authors.
+				=== Authors ===
+Philippe Azevedo aka PasNox: Source code
+Andrei Kopats aka hlamer: Python bindings
 
-	Build and install the library.
 
-1. Enter fresh directory.
-2. Run 'qmake'
-3. Run 'make'
-4. Run 'make install'. Command requires root privileges.
+				=== License ===
+GPL
 
-	Build and install Python bindings
-1. Build the library
-2. Enter 'build' directory:
+
+				=== Waranties ===
+No any
+
+
+				=== Build dependencies ===
+	
+This dependences list created tested on Ubuntu 10.04.
+If you use other OS, write please about your experience, so,
+I could update this README.
+	hlamer.
+
+1. Qt4 library, including development files and utils
+2. GNU Make
+3. GNU C++ compiler.
+4. Python
+5. SIP (http://www.riverbankcomputing.co.uk/software/sip/download). Including development files.
+6. PyQt4. Including development files.
+
+On Ubuntu 10.04 all can be installed by command
+	sudo apt-get install qmake-qt4 libqt4-dev make g++ python python-sip-dev python-qt4 python-qt4-dev
+
+
+				=== Building C++ library ===
+
+1. Download and unpack the sources, if you don't have it now. URL:
+	http://github.com/hlamer/Fresh-framework/archives/master
+2. Enter sources directory.
 	cd <path of fresh directory>
+2. Run 'qmake'
+	qmake
+3. Build the library
+	make
+
+	
+				=== Building and installing Python bindings ===
+1. Build the library (see previous paragraph)
+2. Enter 'Python' directory:
+	cd <path of fresh directory>/Python
 3. Configure:
-		python ../Python/configure.py
-   NOTE: Script tries to detect PyQt4 installation directory automatically, but, 
-   detected path was incorrect for me (hlamer) on Ubuntu 10.04.
-   So, I was need to set it manually. For me, command was:
-		python ../Python/configure.py -d /usr/lib/pymodules/python2.6/PyQt4/
+		python configure.py
 4. Build:
 		make
 5. Install
@@ -28,4 +61,4 @@ send please report or update to the authors.
 	Command requires root privileges.
 6. Try to import installed module
 		python -c 'import PyQt4.fresh'
-	No any traces mean module installed and imported correctly
+	No any traces means module installed and imported correctly
