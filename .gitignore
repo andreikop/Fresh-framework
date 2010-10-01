@@ -1,0 +1,9 @@
+Makefile
+Python/fresh.api
+Python/fresh.exp
+Python/fresh.sbf
+Python/fresh.so
+Python/sipfresh*.cpp
+Python/sipfresh*.o
+build/
+Python/sip*.h

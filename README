@@ -29,7 +29,8 @@ I could update this README.
 2. GNU Make
 3. GNU C++ compiler.
 4. Python
-5. SIP (http://www.riverbankcomputing.co.uk/software/sip/download). Including development files.
+5. SIP. Including development files.
+	(http://www.riverbankcomputing.co.uk/software/sip/download)
 6. PyQt4. Including development files.
 
 On Ubuntu 10.04 all can be installed by command

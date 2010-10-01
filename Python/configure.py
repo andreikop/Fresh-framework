@@ -297,7 +297,7 @@ def main(argv):
     # arguments that weren't specified.
     if opts.freshmoddir is None:
         opts.freshmoddir = pyqt.pyqt_mod_dir
-        if not os.path.exists(opts.freshdir):
+        if not os.path.exists(opts.freshmoddir):
             print 'Invalid PyQt4 installation path in the PyQt4.pyqtconfig. Trying to detect automatically'
             import PyQt4
             opts.freshmoddir = os.path.dirname(PyQt4.__file__)
